@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "462033095162",
+    "project_id": "myapp-8a059",
+    "storage_bucket": "myapp-8a059.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:462033095162:android:b061f03e649542cb16fc43",
+        "android_client_info": {
+          "package_name": "com.example.fastrentv2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "462033095162-fel8b167ech8f93ag0dpl7u30nlrm2of.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBx8JllVu5EpUXuQAB46lA0Wj5GgIr8ETU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "462033095162-fel8b167ech8f93ag0dpl7u30nlrm2of.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
