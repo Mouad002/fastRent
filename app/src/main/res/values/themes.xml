@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.FastRentV2" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/custom_red</item>
+        <item name="colorPrimary">@color/custom_blue</item>
         <item name="colorPrimaryVariant">@color/custom_blue</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
@@ -11,6 +11,7 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="android:navigationBarColor">@color/white_gray</item>
         <!-- Customize your theme here. -->
     </style>
 </resources>

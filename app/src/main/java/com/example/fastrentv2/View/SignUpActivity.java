@@ -79,7 +79,7 @@ public class SignUpActivity extends AppCompatActivity
         });
 
         // progress dialog
-        progressDialog = new ProgressDialog(this);
+        progressDialog = new ProgressDialog(SignUpActivity.this);
         progressDialog.setMessage("PLEASE WAIT");
     }
 
