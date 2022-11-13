@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
-import com.example.fastrentv2.View.SignInActivity;
+import com.example.fastrentv2.Controller.SignInActivity;
 
 public class SplashScreenActivity extends AppCompatActivity {
     private Handler handler = new Handler();

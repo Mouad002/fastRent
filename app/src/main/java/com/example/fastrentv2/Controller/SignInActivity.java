@@ -1,4 +1,4 @@
-package com.example.fastrentv2.View;
+package com.example.fastrentv2.Controller;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -31,7 +31,6 @@ public class SignInActivity extends AppCompatActivity
 
     private FirebaseAuth mAuth;
 
-    private ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -74,8 +73,7 @@ public class SignInActivity extends AppCompatActivity
         });
 
         // progress dialog
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("PLEASE WAIT");
+
     }
 
     public void signIn(View view)
@@ -111,9 +109,16 @@ public class SignInActivity extends AppCompatActivity
             return;
         }
 
-        progressDialog.show(); // the progress dialog appear
+        // declare and show the progress dialog
+        ProgressDialog progressDialog = new ProgressDialog(SignInActivity.this);
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.show();
+        progressDialog.setContentView(R.layout.custom_progress_dialog);
+        progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
         // firebase Authentication
-        mAuth.signInWithEmailAndPassword(emailText,passwordText).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        mAuth.signInWithEmailAndPassword(emailText,passwordText)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task)
             {
@@ -121,10 +126,10 @@ public class SignInActivity extends AppCompatActivity
                 {
                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-                    if(user.isEmailVerified())
+                    if(user.isEmailVerified()) // verify if the user have verified his account
                     {
-                        startActivity(new Intent(SignInActivity.this, MainActivity.class));
-                        finish();
+                        startActivity(new Intent(SignInActivity.this, MainActivity.class)); // open main activity
+                        finish(); // close the current activity
                     }else
                     {
                         user.sendEmailVerification();
@@ -134,9 +139,9 @@ public class SignInActivity extends AppCompatActivity
                 {
                     Toast.makeText(SignInActivity.this, "Failed to sign in!", Toast.LENGTH_SHORT).show();
                 }
+                progressDialog.dismiss(); // the progress dialog disappear
             }
         });
-        progressDialog.dismiss(); // the progress dialog disappear
 
     }
 
@@ -159,6 +164,13 @@ public class SignInActivity extends AppCompatActivity
             return;
         }
 
+        // declare and show the progress dialog
+        ProgressDialog progressDialog = new ProgressDialog(SignInActivity.this);
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.show();
+        progressDialog.setContentView(R.layout.custom_progress_dialog);
+        progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
         mAuth.sendPasswordResetEmail(emailText).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
@@ -169,6 +181,7 @@ public class SignInActivity extends AppCompatActivity
                 {
                     Toast.makeText(SignInActivity.this, "Try again! Something wrong happened", Toast.LENGTH_SHORT).show();
                 }
+                progressDialog.dismiss(); // the progress dialog disappear
             }
         });
 

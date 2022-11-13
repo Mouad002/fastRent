@@ -1,4 +1,4 @@
-package com.example.fastrentv2.View;
+package com.example.fastrentv2.Controller;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,7 +16,6 @@ import androidx.appcompat.widget.AppCompatButton;
 
 import com.example.fastrentv2.Model.Person;
 import com.example.fastrentv2.R;
-import com.google.android.gms.common.internal.BaseGmsClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
@@ -25,21 +23,24 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.UUID;
+
 public class SignUpActivity extends AppCompatActivity
 {
     private TextInputEditText fullName,city,phoneNumber,email,password,repeatPassword;
     private AppCompatButton signUpButton;
     private TextView TermsAndConditions,Account;
 
+    // firebase stuff
     private FirebaseAuth mAuth;
 
     private AlertDialog.Builder dialog;
-    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+
         // firebase stuff
         mAuth = FirebaseAuth.getInstance();
 
@@ -77,10 +78,6 @@ public class SignUpActivity extends AppCompatActivity
                 createAcc(view);
             }
         });
-
-        // progress dialog
-        progressDialog = new ProgressDialog(SignUpActivity.this);
-        progressDialog.setMessage("PLEASE WAIT");
     }
 
     // register action
@@ -156,7 +153,13 @@ public class SignUpActivity extends AppCompatActivity
             return;
         }
 
+        // progress bar stuff
+        ProgressDialog progressDialog = new ProgressDialog(SignUpActivity.this);
+        progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.show(); // the progress dialog appear
+        progressDialog.setContentView(R.layout.custom_progress_dialog);
+        progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
         // firebase operations
         mAuth.createUserWithEmailAndPassword(emailText,passwordText)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -165,10 +168,11 @@ public class SignUpActivity extends AppCompatActivity
                     {
                         if(task.isSuccessful())
                         {
-                            Person p = new Person(fullNameText,cityText,phoneNumberText,emailText);
+                            String personId = mAuth.getCurrentUser().getUid();
+                            Person p = new Person(personId,fullNameText,cityText,phoneNumberText,emailText);
                             FirebaseDatabase.getInstance()
                                     .getReference("Persons")
-                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                    .child(personId)
                                     .setValue(p)
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
@@ -178,20 +182,22 @@ public class SignUpActivity extends AppCompatActivity
                                             {
                                                 startActivity(new Intent(SignUpActivity.this,SignInActivity.class));
                                                 finish();
+                                                progressDialog.dismiss(); // the progress dialog disappear
                                                 Toast.makeText(SignUpActivity.this, "your have registred successfly!", Toast.LENGTH_LONG).show();
                                             }else
                                             {
-                                                Toast.makeText(SignUpActivity.this, "failed to register, try again!", Toast.LENGTH_LONG).show();
+                                                progressDialog.dismiss(); // the progress dialog disappear
+                                                Toast.makeText(SignUpActivity.this, "failed to save your data", Toast.LENGTH_LONG).show();
                                             }
                                         }
                                     });
                         }else
                         {
+                            progressDialog.dismiss(); // the progress dialog disappear
                             Toast.makeText(SignUpActivity.this, "failed to register", Toast.LENGTH_LONG).show();
                         }
                     }
                 });
-        progressDialog.dismiss(); // the progress dialog disappear
     }
 
     // terms and conditions action

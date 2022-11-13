@@ -1,15 +1,17 @@
 package com.example.fastrentv2;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import com.example.fastrentv2.Model.AccountFragment;
-import com.example.fastrentv2.View.HomeFragment;
-import com.example.fastrentv2.View.PostFragment;
+import com.example.fastrentv2.Controller.AccountFragment;
+import com.example.fastrentv2.Controller.HomeFragment;
+import com.example.fastrentv2.Controller.PostFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -52,6 +54,28 @@ public class MainActivity extends AppCompatActivity {
 
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragments_container,home).commit();
+    }
+
+    // to quite the application
+    @Override
+    public void onBackPressed() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setMessage("do you want to leave ?");
+        builder.setCancelable(true);
+        builder.setNegativeButton("no", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        builder.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                MainActivity.super.onBackPressed();
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 }
 

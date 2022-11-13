@@ -3,6 +3,11 @@ package com.example.fastrentv2.Model;
 public class Person
 {
     // attributes
+    public static final String personIdField = "personId";
+    public static final String fullNameField = "fullName";
+    public static final String cityField = "city";
+    public static final String phoneNumberField = "phoneNumber";
+    public static final String emailField = "email";
 
     private String personId;
     private String fullName;
