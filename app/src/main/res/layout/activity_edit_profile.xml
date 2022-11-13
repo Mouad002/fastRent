@@ -122,17 +122,6 @@
             app:layout_constraintTop_toBottomOf="@+id/editprofile_til_city"
             tools:layout_editor_absoluteX="20dp" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/editprofile_acb_deleteprofile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:background="@drawable/btn_red"
-            android:text="delete profile"
-            android:textColor="@color/white"
-            app:layout_constraintTop_toBottomOf="@+id/editprofile_acb_updateprofile"
-            tools:layout_editor_absoluteX="20dp" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

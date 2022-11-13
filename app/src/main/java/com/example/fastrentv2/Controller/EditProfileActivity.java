@@ -37,7 +37,7 @@ public class EditProfileActivity extends AppCompatActivity {
     private ImageView iv_back;
     private CircleImageView civ_profilePic;
     private TextInputEditText tiet_fullName,tiet_phoneNumber,tiet_city;
-    private AppCompatButton acb_updateProfile,acb_deleteProfile;
+    private AppCompatButton acb_updateProfile;
 
     // picture stuff
     private Uri uri;
@@ -64,7 +64,6 @@ public class EditProfileActivity extends AppCompatActivity {
         tiet_phoneNumber = findViewById(R.id.editprofile_tiet_phonenumber);
         tiet_city = findViewById(R.id.editprofile_tiet_city);
         acb_updateProfile = findViewById(R.id.editprofile_acb_updateprofile);
-        acb_deleteProfile = findViewById(R.id.editprofile_acb_deleteprofile);
 
         iv_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,13 +84,6 @@ public class EditProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 uploadData();
-            }
-        });
-
-        acb_deleteProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
             }
         });
     }
