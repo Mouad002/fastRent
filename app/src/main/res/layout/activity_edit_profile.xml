@@ -101,13 +101,14 @@
             app:boxBackgroundMode="outline"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editprofile_til_phonenumber">
+            app:layout_constraintTop_toBottomOf="@+id/editprofile_til_phonenumber"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editprofile_tiet_city"
+            <AutoCompleteTextView
+                android:id="@+id/editprofile_actv_city"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:inputType="text" />
+                android:inputType="none" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

@@ -52,13 +52,13 @@
             android:layout_marginBottom="30dp"
             android:hint="@string/city"
             app:boxBackgroundColor="@color/cardview_light_background"
-            app:boxBackgroundMode="outline">
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/sign_up_tiet_city"
+            <AutoCompleteTextView
+                android:id="@+id/sign_up_actv_city"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:inputType="text"/>
+                android:inputType="none"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 

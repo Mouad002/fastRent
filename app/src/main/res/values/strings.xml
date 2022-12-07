@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">fastRentV2</string>
-    <string name="signin_account_question">create new account</string>
-    <string name="signin_password_question">forgot password</string>
+    <string name="app_name">Fast Rent</string>
+    <string name="signin_account_question">Create new account ?</string>
+    <string name="signin_password_question">Forgot password ?</string>
     <string name="email">email</string>
     <string name="password">password</string>
     <string name="repeatpassword">repeat password</string>
@@ -10,9 +10,9 @@
     <string name="signup">sign up</string>
     <string name="city">city</string>
     <string name="phonenumber">phone number</string>
-    <string name="signup_terms_message">by signing up you agree to our terms and conditions</string>
-    <string name="signup_terms_and_conditions">terms and conditions</string>
-    <string name="signup_already_have_account">already have an account ?</string>
+    <string name="signup_terms_message">By signing up you agree to our terms and conditions</string>
+    <string name="signup_terms_and_conditions">Terms and conditions</string>
+    <string name="signup_already_have_account">Already have an account ?</string>
     <string name="signin_welcome_again">Welcome Again</string>
     <string name="signup_create_new_acccount">Create Account</string>
     <!-- TODO: Remove or change this placeholder text -->

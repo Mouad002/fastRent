@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Controller.AddNewPostActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/editpost_iv_back"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_round_arrow_back_24" />
+
+        <TextView
+            android:id="@+id/editpost_tv_addnewpost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/urbanist_bold"
+            android:text="edit post"
+            android:textColor="@color/custom_blue"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/editpost_tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:fontFamily="@font/urbanist_regular"
+            android:textColor="@color/black"
+            android:text="Title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/editpost_iv_back" />
+
+        <EditText
+            android:id="@+id/editpost_et_title"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/edit_text_style1"
+            android:ems="10"
+            android:fontFamily="@font/urbanist_regular"
+            android:hint="ex : xxx car super comfort"
+            android:inputType="textPersonName"
+            android:padding="15dp"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/editpost_tv_title" />
+
+        <TextView
+            android:id="@+id/editpost_tv_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:fontFamily="@font/urbanist_regular"
+            android:text="Desciption"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editpost_til_city" /> <!-- et city-->
+
+        <EditText
+            android:id="@+id/editpost_et_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/edit_text_style1"
+            android:ems="10"
+            android:fontFamily="@font/urbanist_regular"
+            android:gravity="top"
+            android:hint="ex : xxx car super comfort with red color and ..."
+            android:inputType="textMultiLine"
+            android:lines="10"
+            android:padding="15dp"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editpost_tv_description" />
+
+        <TextView
+            android:id="@+id/editpost_tv_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:fontFamily="@font/urbanist_regular"
+            android:text="Category"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/editpost_et_description"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/editpost_til_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            app:boxBackgroundColor="@color/cardview_light_background"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/editpost_tv_category" >
+
+            <AutoCompleteTextView
+                android:id="@+id/editpost_actv_category"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:fontFamily="@font/urbanist_regular"
+                android:background="@drawable/edit_text_style1"
+                android:inputType="none"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/editpost_tv_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:fontFamily="@font/urbanist_regular"
+            android:text="Price per day"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/editpost_et_title" /> <!-- et title -->
+
+
+        <EditText
+            android:id="@+id/editpost_et_price"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/edit_text_style1"
+            android:ems="10"
+            android:fontFamily="@font/urbanist_regular"
+            android:hint="ex : 300"
+            android:inputType="numberDecimal"
+            android:padding="15dp"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/editpost_tv_price" />
+
+        <TextView
+            android:id="@+id/editpost_tv_city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:fontFamily="@font/urbanist_regular"
+            android:text="City"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/editpost_et_price"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/editpost_til_city"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            app:boxBackgroundColor="@color/cardview_light_background"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/editpost_tv_city" >
+
+            <AutoCompleteTextView
+                android:id="@+id/editpost_actv_city"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:fontFamily="@font/urbanist_regular"
+                android:background="@drawable/edit_text_style1"
+                android:inputType="none"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/editpost_tv_picture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:fontFamily="@font/urbanist_regular"
+            android:text="Picture"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/editpost_til_category"/><!-- description-->
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/editpost_siv_picture"
+            android:layout_width="100dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/gallery"
+            android:scaleType="centerCrop"
+            app:shapeAppearance="@style/roundimageview"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/editpost_tv_picture"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/editpost_acb_edit"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:text="edit"
+            android:textColor="@color/white"
+            android:background="@drawable/btn_update"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/editpost_siv_picture"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/editpost_acb_edit"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</ScrollView>

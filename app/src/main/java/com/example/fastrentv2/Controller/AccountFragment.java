@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,6 +40,7 @@ public class AccountFragment extends Fragment {
     private View view;
     private TextView tv_fullName,tv_email,tv_phoneNumber,tv_city,tv_updateProfile,tv_signOut;
     private CircleImageView civ_profilePic;
+    private ImageView iv_edit;
 
     // firebase stuff
     private FirebaseUser user;
@@ -53,8 +55,8 @@ public class AccountFragment extends Fragment {
         // firebase stuff
         user = FirebaseAuth.getInstance().getCurrentUser();
         userId = user.getUid();
-        reference = FirebaseDatabase.getInstance().getReference("Persons");
-        storageReference = FirebaseStorage.getInstance().getReference("profile/"+userId+".jpg");
+        reference = FirebaseDatabase.getInstance().getReference("persons");
+        storageReference = FirebaseStorage.getInstance().getReference("persons/"+userId+".jpg");
 
 
         view = inflater.inflate(R.layout.fragment_account, container, false);
@@ -63,11 +65,12 @@ public class AccountFragment extends Fragment {
         tv_email = view.findViewById(R.id.account_tv_email);
         tv_phoneNumber = view.findViewById(R.id.account_tv_phonenumber);
         tv_city = view.findViewById(R.id.account_tv_city);
-        tv_updateProfile = view.findViewById(R.id.account_tv_updateprofile);
+//        tv_updateProfile = view.findViewById(R.id.account_tv_updateprofile);
         tv_signOut = view.findViewById(R.id.account_tv_signout);
         civ_profilePic = view.findViewById(R.id.account_civ_profilepic);
+        iv_edit = view.findViewById(R.id.account_iv_edit);
 
-        tv_updateProfile.setOnClickListener(new View.OnClickListener() {
+        iv_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(),EditProfileActivity.class));

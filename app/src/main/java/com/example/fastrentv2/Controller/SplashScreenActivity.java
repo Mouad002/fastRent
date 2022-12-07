@@ -1,4 +1,4 @@
-package com.example.fastrentv2;
+package com.example.fastrentv2.Controller;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
-import com.example.fastrentv2.Controller.SignInActivity;
+import com.example.fastrentv2.R;
 
 public class SplashScreenActivity extends AppCompatActivity {
     private Handler handler = new Handler();

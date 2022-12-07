@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,6 +16,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
+import com.example.fastrentv2.Functional.Helper;
 import com.example.fastrentv2.Model.Person;
 import com.example.fastrentv2.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -27,26 +30,32 @@ import java.util.UUID;
 
 public class SignUpActivity extends AppCompatActivity
 {
-    private TextInputEditText fullName,city,phoneNumber,email,password,repeatPassword;
+    private TextInputEditText fullName,phoneNumber,email,password,repeatPassword;
     private AppCompatButton signUpButton;
     private TextView TermsAndConditions,Account;
+    private AutoCompleteTextView actv_cities;
 
     // firebase stuff
     private FirebaseAuth mAuth;
 
     private AlertDialog.Builder dialog;
 
+    private Helper helper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+
+
+        helper = new Helper(SignUpActivity.this);
 
         // firebase stuff
         mAuth = FirebaseAuth.getInstance();
 
         // compenent initializing
         fullName = findViewById(R.id.sign_up_tiet_fullname);
-        city = findViewById(R.id.sign_up_tiet_city);
+        actv_cities = findViewById(R.id.sign_up_actv_city);
         phoneNumber = findViewById(R.id.sign_up_tiet_phonenumber);
         email = findViewById(R.id.sign_up_tiet_email);
         password = findViewById(R.id.sign_up_tiet_password);
@@ -55,6 +64,7 @@ public class SignUpActivity extends AppCompatActivity
         TermsAndConditions = findViewById(R.id.sign_up_tv_termandconditions);
         Account = findViewById(R.id.sign_up_tv_account);
 
+        setcombobox();
         // button action
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,7 +94,7 @@ public class SignUpActivity extends AppCompatActivity
     private void register(View view)
     {
         String fullNameText = fullName.getEditableText().toString().trim();
-        String cityText = city.getEditableText().toString().trim();
+        String cityText = actv_cities.getEditableText().toString().trim();
         String phoneNumberText = phoneNumber.getEditableText().toString().trim();
         String emailText = email.getEditableText().toString().trim();
         String passwordText = password.getEditableText().toString().trim();
@@ -99,8 +109,8 @@ public class SignUpActivity extends AppCompatActivity
 
         if(cityText.isEmpty())
         {
-            city.setError("city is required!");
-            city.requestFocus();
+            actv_cities.setError("city is required!");
+            actv_cities.requestFocus();
             return;
         }
 
@@ -148,7 +158,7 @@ public class SignUpActivity extends AppCompatActivity
 
         if(!repeatPasswordText.equals(passwordText))
         {
-            repeatPassword.setError("the passwords don't matche!");
+            repeatPassword.setError("the passwords don't match!");
             repeatPassword.requestFocus();
             return;
         }
@@ -169,9 +179,9 @@ public class SignUpActivity extends AppCompatActivity
                         if(task.isSuccessful())
                         {
                             String personId = mAuth.getCurrentUser().getUid();
-                            Person p = new Person(personId,fullNameText,cityText,phoneNumberText,emailText);
+                            Person p = new Person(personId,fullNameText,cityText,phoneNumberText,emailText,null);
                             FirebaseDatabase.getInstance()
-                                    .getReference("Persons")
+                                    .getReference("persons")
                                     .child(personId)
                                     .setValue(p)
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -339,4 +349,11 @@ public class SignUpActivity extends AppCompatActivity
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
+
+    private void setcombobox()
+    {
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(SignUpActivity.this,R.layout.cmb_text_view,helper.getCities());
+        actv_cities.setAdapter(adapter);
+    }
+
 }
