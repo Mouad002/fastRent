@@ -12,9 +12,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.fastrentv2.Functional.Helper;
 import com.example.fastrentv2.Model.Person;
 import com.example.fastrentv2.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -29,6 +32,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -36,8 +40,12 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class EditProfileActivity extends AppCompatActivity {
     private ImageView iv_back;
     private CircleImageView civ_profilePic;
-    private TextInputEditText tiet_fullName,tiet_phoneNumber,tiet_city;
+    private TextInputEditText tiet_fullName,tiet_phoneNumber;
+    private AutoCompleteTextView actv_cities;
     private AppCompatButton acb_updateProfile;
+
+    // progress dialog
+    private ProgressDialog progressDialog;
 
     // picture stuff
     private Uri uri;
@@ -48,21 +56,25 @@ public class EditProfileActivity extends AppCompatActivity {
     private StorageReference storageReference;
     private DatabaseReference realTimeReference;
 
+    private Helper helper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
 
+        helper = new Helper(EditProfileActivity.this);
+
         // fire base stuff
         mAuth = FirebaseAuth.getInstance();
-        storageReference = FirebaseStorage.getInstance().getReference("profile");
-        realTimeReference = FirebaseDatabase.getInstance().getReference("Persons");
+        storageReference = FirebaseStorage.getInstance().getReference("persons");
+        realTimeReference = FirebaseDatabase.getInstance().getReference("persons");
 
         iv_back = findViewById(R.id.editprofile_iv_back);
         civ_profilePic = findViewById(R.id.editprofile_civ_profilepic);
         tiet_fullName = findViewById(R.id.editprofile_tiet_fullname);
         tiet_phoneNumber = findViewById(R.id.editprofile_tiet_phonenumber);
-        tiet_city = findViewById(R.id.editprofile_tiet_city);
+        actv_cities = findViewById(R.id.editprofile_actv_city);
         acb_updateProfile = findViewById(R.id.editprofile_acb_updateprofile);
 
         iv_back.setOnClickListener(new View.OnClickListener() {
@@ -86,6 +98,8 @@ public class EditProfileActivity extends AppCompatActivity {
                 uploadData();
             }
         });
+
+        setcombobox();
     }
 
     @Override
@@ -112,10 +126,12 @@ public class EditProfileActivity extends AppCompatActivity {
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     Toast.makeText(EditProfileActivity.this, "image uploaded successfully", Toast.LENGTH_SHORT).show();
                     finish();
+                    progressDialog.dismiss();
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
+                    progressDialog.dismiss();
                     Toast.makeText(EditProfileActivity.this, "a problem appears in uploading your image", Toast.LENGTH_SHORT).show();
                 }
             });
@@ -126,7 +142,7 @@ public class EditProfileActivity extends AppCompatActivity {
     {
 
         String fullNameText = tiet_fullName.getEditableText().toString().trim();
-        String cityText = tiet_city.getEditableText().toString().trim();
+        String cityText = actv_cities.getEditableText().toString().trim();
         String phoneNumberText = tiet_phoneNumber.getEditableText().toString().trim();
 
         if(fullNameText.isEmpty())
@@ -138,8 +154,8 @@ public class EditProfileActivity extends AppCompatActivity {
 
         if(cityText.isEmpty())
         {
-            tiet_city.setError("city is required!");
-            tiet_city.requestFocus();
+            actv_cities.setError("city is required!");
+            actv_cities.requestFocus();
             return;
         }
 
@@ -157,7 +173,7 @@ public class EditProfileActivity extends AppCompatActivity {
         }
 
         // progress bar
-        ProgressDialog progressDialog = new ProgressDialog(EditProfileActivity.this);
+        progressDialog = new ProgressDialog(EditProfileActivity.this);
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.show(); // the progress dialog appear
         progressDialog.setContentView(R.layout.custom_progress_dialog);
@@ -165,9 +181,11 @@ public class EditProfileActivity extends AppCompatActivity {
 
         Person person = new Person(mAuth.getCurrentUser().getUid(),
                 tiet_fullName.getText().toString().trim(),
-                tiet_city.getText().toString().trim(),
+                actv_cities.getText().toString().trim(),
                 tiet_phoneNumber.getText().toString().trim(),
+                null,
                 null);
+
         HashMap data = new HashMap<>();
 
         data.put(Person.fullNameField,person.getFullName());
@@ -183,7 +201,6 @@ public class EditProfileActivity extends AppCompatActivity {
                         {
                             uploadTheNewImage();
                             Toast.makeText(EditProfileActivity.this, "your informations were updated successfuly", Toast.LENGTH_SHORT).show();
-                            progressDialog.dismiss();
                         }
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -193,5 +210,11 @@ public class EditProfileActivity extends AppCompatActivity {
                         progressDialog.dismiss();
                     }
                 });
+    }
+
+    private void setcombobox()
+    {
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(EditProfileActivity.this,R.layout.cmb_text_view,helper.getCities());
+        actv_cities.setAdapter(adapter);
     }
 }

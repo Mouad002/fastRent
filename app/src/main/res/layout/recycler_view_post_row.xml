@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:cardBackgroundColor="#fff"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="3dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <ImageView
+                android:id="@+id/post_row_iv_menu"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/ic_round_more_vert_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/post_row_iv"
+                android:layout_width="100dp"
+                android:layout_height="130dp"
+                android:layout_margin="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:src="@drawable/gallery"
+                android:scaleType="centerCrop"
+                app:shapeAppearance="@style/roundimageview"/>
+
+            <TextView
+                android:id="@+id/post_row_tv_title"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="titletitletitletitletitletitletitle"
+                android:textColor="@color/custom_blue"
+                android:maxLines="1"
+                android:fontFamily="@font/urbanist_bold"
+                android:textSize="18sp"
+                app:layout_constraintStart_toEndOf="@+id/post_row_iv"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/post_row_tv_description"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text "
+                android:fontFamily="@font/urbanist_regular"
+                android:maxLines="3"
+                app:layout_constraintStart_toEndOf="@+id/post_row_iv"
+                app:layout_constraintTop_toBottomOf="@+id/post_row_tv_title" />
+
+            <TextView
+                android:id="@+id/post_row_tv_duration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                android:text="/ day"
+                android:fontFamily="@font/urbanist_bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:id="@+id/post_row_tv_city"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="city"
+                android:maxLines="1"
+                android:fontFamily="@font/urbanist_bold"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/post_row_iv" />
+
+            <TextView
+                android:id="@+id/post_row_tv_price"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="price"
+                android:maxLines="1"
+                android:textSize="18dp"
+                android:textColor="@color/price_green"
+                android:fontFamily="@font/urbanist_bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/post_row_tv_duration" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

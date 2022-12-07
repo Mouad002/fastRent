@@ -10,4 +10,5 @@
     <color name="white_gray">#7E7E7E</color>
     <color name="custom_blue">#151D3C</color>
     <color name="custom_red">#EF575F</color>
+    <color name="price_green">#37B835</color>
 </resources>
